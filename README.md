@@ -1,4 +1,4 @@
-# video web scrape app
+# Video Web Scrape App
 
 A web application built using Flask that allows users to search, watch, and manage video content across multiple streaming platforms. The app features modular scraping, where the modules can be added dynamically from JSON files, user accounts with authentication, and a "My List" feature for storing favorite shows.
 
