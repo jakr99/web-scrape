@@ -1,0 +1,58 @@
+{
+    "moduleInfo": {
+        "moduleName": "Anitaku",
+        "moduleInitials": "ATK",
+        "moduleDesc": "This is a module to get data from Anitaku (formerly GoGoAnime) website",
+        "developer": "unknown",
+        "moduleID": "28932498734237987329",
+        "moduleImage": "https://anitaku.to/images/logo.png",
+        "moduleVersion": 2.91,
+        "moduleLenguage": "ENG",
+        "moduleType": "Video",
+        "baseURL": "https://anitaku.to/",
+        "moduleDeveloperSite": "https://mprotmod.github.io/Modules-KETSU/index.html",
+        "UpdateSite": "https://raw.githubusercontent.com/mprotmod/Modules-KETSU/main/Module%20Parser%20KETSU/Anitaku/moduleTemplate.json",
+        "preferedServer": "GOTAKU1",
+        "preferedDownloadServer": "GOTAKU1",
+        "blackListed": []
+    },
+    "selectors": {
+        "itemSelector": ".items li",
+        "titleSelector": "a",               
+        "linkSelector": "a",                
+        "imageSelector": "img"              
+    },
+    "global": {
+        "variables": [],
+        "cookies": [],
+        "headers": []
+    },
+    "mainPage": [
+        {
+            "request": {
+                "url": "https://anitaku.to/popular.html",
+                "method": "get",
+                "headers": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function processData(response) { var dataArray = []; var parser = new DOMParser(); var doc = parser.parseFromString(response, 'text/html'); var items = doc.querySelectorAll('.last_episodes li'); items.forEach(function(item) { var title = item.querySelector('a').getAttribute('title'); var link = 'https://anitaku.to' + item.querySelector('a').getAttribute('href'); var image = item.querySelector('img').getAttribute('src'); dataArray.push({ title: title, link: link, image: image }); }); return dataArray; }"
+            }
+        }
+    ],
+    "search": [
+        {
+            "request": {
+                "url": "https://anitaku.to/search.html?keyword=<searched>",
+                "method": "get",
+                "headers": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function processData(response) { var dataArray = []; var parser = new DOMParser(); var doc = parser.parseFromString(response, 'text/html'); var items = doc.querySelectorAll('.items li'); items.forEach(function(item) { var title = item.querySelector('a').getAttribute('title'); var link = 'https://anitaku.to' + item.querySelector('a').getAttribute('href'); var image = item.querySelector('img').getAttribute('src'); dataArray.push({ title: title, link: link, image: image }); }); return dataArray; }"
+            }
+        }
+    ]
+}

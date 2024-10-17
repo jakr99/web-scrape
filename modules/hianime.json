@@ -1,0 +1,58 @@
+{
+    "moduleInfo": {
+        "moduleName": "HiAnime (In Development)",
+        "moduleInitials": "HA",
+        "moduleDesc": "Module for HiAnime (formerly Zoro). Subs are now supported on newer versions of Ketsu.",
+        "developer": "ナビル",
+        "moduleID": "114653268923213246",
+        "moduleImage": "https://hianime.to/favicon.ico",
+        "moduleVersion": 2.23,
+        "moduleLenguage": "ENG",
+        "moduleType": "Video",
+        "baseURL": "https://hianime.to/",
+        "moduleDeveloperSite": "https://bilnaa.github.io/main/",
+        "UpdateSite": "https://raw.githubusercontent.com/mprotmod/Modules-KETSU/main/Module%20Parser%20KETSU/hianime.json",
+        "preferedServer": "MEGACLOUD",
+        "preferedDownloadServer": "MEGACLOUD",
+        "blackListed": []
+    },
+    "selectors": {
+        "itemSelector": ".flw-item",
+        "titleSelector": "a",              
+        "linkSelector": "a",               
+        "imageSelector": "img"            
+    },
+    "global": {
+        "variables": [],
+        "cookies": [],
+        "headers": []
+    },
+    "mainPage": [
+        {
+            "request": {
+                "url": "https://hianime.to/home/",
+                "method": "get",
+                "headers": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function processData(response) { var dataArray = []; var parser = new DOMParser(); var doc = parser.parseFromString(response, 'text/html'); var items = doc.querySelectorAll('.flw-item'); items.forEach(function(item) { var title = item.querySelector('img').alt; var link = 'https://hianime.to' + item.querySelector('a').href.replace('/watch',''); var image = item.querySelector('img').dataset.src; dataArray.push({ title: title, link: link, image: image }); }); return dataArray; }"
+            }
+        }
+    ],
+    "search": [
+        {
+            "request": {
+                "url": "https://hianime.to/search?keyword=<searched>",
+                "method": "get",
+                "headers": []
+            },
+            "javascriptConfig": {
+                "removeJavascript": true,
+                "loadInWebView": false,
+                "javaScript": "function processData(response) { var dataArray = []; var parser = new DOMParser(); var doc = parser.parseFromString(response, 'text/html'); var items = doc.querySelectorAll('.flw-item'); items.forEach(function(item) { var title = item.querySelector('img').alt; var link = 'https://hianime.to' + item.querySelector('a').href.replace('/watch',''); var image = item.querySelector('img').dataset.src; dataArray.push({ title: title, link: link, image: image }); }); return dataArray; }"
+            }
+        }
+    ]
+}
